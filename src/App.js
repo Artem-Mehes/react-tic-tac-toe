@@ -7,6 +7,7 @@ class App extends Component {
 
         this.state = {
             cells: Array(9).fill(null),
+            classNames: Array(9).fill('cell'),
             count: 0,
             isGameFinished: false,
             isGameStarted: false,
@@ -69,7 +70,7 @@ class App extends Component {
                             ...prevState.winsScore,
                             [symbol]: this.state.winsScore[symbol] + 1
                         }
-                    }));
+                    }), this.showWinnerLine(line));
                 } else if (this.state.count === 9) {
                     this.setState({
                         isGameFinished: true,
@@ -79,11 +80,25 @@ class App extends Component {
         });
     }
 
+    showWinnerLine = winnerLine => {
+        const classNames = [];
+        this.state.classNames.forEach((name, i) => {
+            if ( winnerLine.includes(i) ) {
+                classNames.push('cell winner-cell');
+            } else {
+                classNames.push('cell');
+            }
+        });
+
+        this.setState({ classNames })
+    }
+
     startNewGame = () => {
         this.setState({
             isGameFinished: false,
             count: 0,
             cells: Array(9).fill(null),
+            classNames: Array(9).fill('cell'),
             isDraw: false,
             winner: null,
             firstPlayer: 'X',
@@ -114,7 +129,7 @@ class App extends Component {
                     </div>
                 </>
         } 
-        
+
         return (
             <>
                 <header className="header">
@@ -131,15 +146,15 @@ class App extends Component {
                     </div>
 
                     <div className="tic-tac-toe">
-                        <span className="cell" onClick={this.handleClick} data="0">{this.state.cells[0]}</span>
-                        <span className="cell" onClick={this.handleClick} data="1">{this.state.cells[1]}</span>
-                        <span className="cell" onClick={this.handleClick} data="2">{this.state.cells[2]}</span>
-                        <span className="cell" onClick={this.handleClick} data="3">{this.state.cells[3]}</span>
-                        <span className="cell" onClick={this.handleClick} data="4">{this.state.cells[4]}</span>
-                        <span className="cell" onClick={this.handleClick} data="5">{this.state.cells[5]}</span>
-                        <span className="cell" onClick={this.handleClick} data="6">{this.state.cells[6]}</span>
-                        <span className="cell" onClick={this.handleClick} data="7">{this.state.cells[7]}</span>
-                        <span className="cell" onClick={this.handleClick} data="8">{this.state.cells[8]}</span>
+                        <span className={this.state.classNames[0]} onClick={this.handleClick} data="0">{this.state.cells[0]}</span>
+                        <span className={this.state.classNames[1]} onClick={this.handleClick} data="1">{this.state.cells[1]}</span>
+                        <span className={this.state.classNames[2]} onClick={this.handleClick} data="2">{this.state.cells[2]}</span>
+                        <span className={this.state.classNames[3]} onClick={this.handleClick} data="3">{this.state.cells[3]}</span>
+                        <span className={this.state.classNames[4]} onClick={this.handleClick} data="4">{this.state.cells[4]}</span>
+                        <span className={this.state.classNames[5]} onClick={this.handleClick} data="5">{this.state.cells[5]}</span>
+                        <span className={this.state.classNames[6]} onClick={this.handleClick} data="6">{this.state.cells[6]}</span>
+                        <span className={this.state.classNames[7]} onClick={this.handleClick} data="7">{this.state.cells[7]}</span>
+                        <span className={this.state.classNames[8]} onClick={this.handleClick} data="8">{this.state.cells[8]}</span>
                     </div>
 
                     <div className="score">

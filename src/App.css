@@ -53,6 +53,11 @@ html {
     justify-content: center;
 }
 
+.winner-cell {
+    background-color: #ea1313;
+    color: #fff;
+}
+
 .btn {
     background-color: #000;
     color: #fff;
